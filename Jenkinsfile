@@ -7,8 +7,8 @@ node {
    stage 'checkout'
 
    // Get some code from a GitHub repository
-   git url: 'https://github.com/kesselborn/jenkinsfile'
-   bat 'git clean -fdx; sleep 4;'
+   git url: 'https://github.com/walidg2/jenkinsfile'
+   bat 'git clean -fdx; timeout 4;'
 
    // Get the maven tool.
    // ** NOTE: This 'mvn' maven tool must be configured
@@ -23,9 +23,9 @@ node {
 
    stage 'test'
    parallel 'test': {
-     bat "${mvnHome}/bin/mvn test; sleep 2;"
+     bat "${mvnHome}/bin/mvn test; timeout 2;"
    }, 'verify': {
-     bat "${mvnHome}/bin/mvn verify; sleep 3"
+     bat "${mvnHome}/bin/mvn verify; timeout 3"
    }
 
    stage 'archive'
@@ -35,10 +35,10 @@ node {
 
 node {
    stage 'deploy Canary'
-   bat 'echo "write your deploy code here"; sleep 5;'
+   bat 'echo "write your deploy code here"; timeout 5;'
 
    stage 'deploy Production'
    input 'Proceed?'
-   bat 'echo "write your deploy code here"; sleep 6;'
+   bat 'echo "write your deploy code here"; timeout 6;'
    archive 'target/*.jar'
 }
