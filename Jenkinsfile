@@ -8,7 +8,7 @@ node {
 
    // Get some code from a GitHub repository
    git url: 'https://github.com/walidg2/jenkinsfile'
-   bat 'git clean -fdx && timeout 4'
+   bat 'git clean -fdx'
 
    // Get the maven tool.
    // ** NOTE: This 'mvn' maven tool must be configured
