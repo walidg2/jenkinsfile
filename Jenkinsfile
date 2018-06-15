@@ -13,7 +13,7 @@ node {
    // Get the maven tool.
    // ** NOTE: This 'mvn' maven tool must be configured
    // **       in the global configuration.
-   def mvnHome = tool 'mvn'
+   def mvnHome = tool 'maven3.5.3_'
 
    stage 'build'
    // set the version of the build artifact to the Jenkins BUILD_NUMBER so you can
@@ -23,9 +23,9 @@ node {
 
    stage 'test'
    parallel 'test': {
-     bat "${mvnHome}/bin/mvn test & timeout 2"
+     bat "${mvnHome}/bin/mvn test"
    }, 'verify': {
-     bat "${mvnHome}/bin/mvn verify & timeout 3"
+     bat "${mvnHome}/bin/mvn verify"
    }
 
    stage 'archive'
@@ -35,10 +35,10 @@ node {
 
 node {
    stage 'deploy Canary'
-   bat 'echo "write your deploy code here" & timeout 5'
+   bat 'echo "write your deploy code here"'
 
    stage 'deploy Production'
    input 'Proceed?'
-   bat 'echo "write your deploy code here" & timeout 6'
+   bat 'echo "write your deploy code here2"'
    archive 'target/*.jar'
 }
