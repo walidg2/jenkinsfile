@@ -23,7 +23,7 @@ node {
 
    stage 'test'
    parallel 'test': {
-     bat "${mvnHome}/bin/mvn test"
+     bat "${mvnHome}/bin/mvn test -Dsurefire.useFile=false"
    }, 'verify': {
      bat "${mvnHome}/bin/mvn verify"
    }
